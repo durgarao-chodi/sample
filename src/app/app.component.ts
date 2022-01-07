@@ -1,9 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ChartConfiguration } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { DataQualityService } from './data-quality.service';
 @Component({
@@ -30,10 +31,11 @@ export class AppComponent {
       plugins:{
       legend:{
         display:true,
-        position:'top'
+        position:'bottom'
       }
     }
   }
+  
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -58,7 +60,7 @@ export class AppComponent {
           })
   } 
   
-  constructor(private service:DataQualityService,private router:Router,private changeDetect:ChangeDetectorRef){
+  constructor(private service:DataQualityService,private router:Router,private changeDetect:ChangeDetectorRef,private datepipe:DatePipe){
     this.router.routeReuseStrategy.shouldReuseRoute=function(){
       return false;
     }
@@ -74,8 +76,8 @@ export class AppComponent {
 
   public viewData(errorCode:string){
     this.service.getViewData(errorCode).subscribe(data=>{
-      this.displayedColumns= Object.keys(data.data[0])
-      this.dataSource=new MatTableDataSource(data.data);
+      this.displayedColumns= Object.keys(data[0])
+      this.dataSource=new MatTableDataSource(data);
       this.dataSource.paginator=this.paginator;
     },err=>{
 
@@ -85,5 +87,8 @@ export class AppComponent {
   valueChanges(data:any){
     this.showChart=!this.showChart;
     this.fontStyleControl.setValue(data.value)
+  }
+  value(columnName:string,value:string){
+  return columnName.includes('Date')?this.datepipe.transform(value,'yyyy-MM-dd HH:MM:ss'):value;
   }
 }

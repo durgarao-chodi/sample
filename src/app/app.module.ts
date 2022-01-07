@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,10 @@ import {MatDividerModule} from '@angular/material/divider';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    NgHttpLoaderModule.forRoot(),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent ]
 })
 export class AppModule { }

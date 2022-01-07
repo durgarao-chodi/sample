@@ -10,9 +10,9 @@ export class DataQualityService {
   constructor(private http:HttpClient){ 
   }
   getReportData() :Observable<any>{ 
-    return this.http.get('../assets/sample1_data.json');
+    return this.http.get('https://dataqualityteam4.azurewebsites.net/fetchErrorCount')
   }
-  getViewData(columnName:string|null):Observable<any>{
-    return this.http.get('../assets/table_data.json');
+  getViewData(errorCode:string|null):Observable<any>{
+    return this.http.get(`https://dataqualityteam4.azurewebsites.net/fetchErrorData?errorCode=${errorCode}`);
   }
 }
