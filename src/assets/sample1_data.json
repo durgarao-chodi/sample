@@ -1,0 +1,17 @@
+[
+      {
+        "errorCode": "A_01",
+        "errorMessage": "Anomaly",
+        "count": 2
+      },
+      {
+        "errorCode": "D_01",
+        "errorMessage": "Data error",
+        "count": 10
+      },
+      {
+        "errorCode": "D_02",
+        "errorMessage": "Data error2",
+        "count": 20
+      }
+    ]
