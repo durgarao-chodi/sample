@@ -1,0 +1,37 @@
+mat-button-toggle-group {
+  flex-wrap: wrap;
+  border: none !important;
+}
+
+.mat-button-toggle-checked {
+  box-shadow: 0 0 30px rgb(0, 0, 0) !important;
+  border: 2px #f28628 solid !important;
+  border-radius: 15px !important;
+  background-color: #3f51b5 !important;
+  color: #fff !important;
+}
+
+mat-button-toggle {
+  border: 2px solid #f28628;
+  border-radius: 15px;
+  margin: 3px 3px;
+  font-family: "Nunito Semibold", sans-serif;
+  font-size: 14px;
+  font-style: bold;
+}
+
+.mat-button-toggle-disabled {
+  border: 2px solid #c5c0c7;
+  background-color: #e1dde5;
+}
+
+.mat-button {
+  font-size: 36px !important;
+  height: 72px !important;
+  border-radius: 15px !important;
+  margin: 20px !important;
+}
+
+section {
+  margin-bottom: 30px !important;
+}

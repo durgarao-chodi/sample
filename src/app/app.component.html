@@ -1,57 +1,83 @@
 <div class="container">
-  <ng-container  *ngIf=showChart>
-  <div class="row">
-  <h1 class="display-2 text-center">Data Quality Report</h1>
-    <div class="col-sm-6 offset-sm-3 p-3">
-      <canvas baseChart
-      [datasets]="chartDataSets"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'pie'"
-      (chartClick)="chartClicked($event)">
-      </canvas>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-4 offset-sm-4">
-          <section>
-              <mat-button-toggle-group aria-label="Font Style">
-                <mat-button-toggle (change)="valueChanges($event)" [value]="data.errorMessage" *ngFor="let data of reportData">{{data.errorMessage}}</mat-button-toggle>
-              </mat-button-toggle-group>
-            </section>
+  <ng-container *ngIf="showChart">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2">
+        <h1 class="mat-display-4 text-center pt-3">Data Quality Report</h1>
+        <canvas
+          baseChart
+          [datasets]="chartDataSets"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [type]="'pie'"
+          (chartClick)="chartClicked($event)"
+          [plugins]="barChartPlugins"
+        >
+        </canvas>
       </div>
-  </div>
-</ng-container>
-  <div class="row" *ngIf=!showChart>
-    <button mat-button color="primary" (click)="showChart=!showChart">Go Back To Report
+    </div>
+    <div class="row">
+      <p class="mat-title text-left">
+        Click on any of the above chart slice or below buttons to see the
+        details
+      </p>
+      <section>
+        <mat-button-toggle-group aria-label="Font Style">
+          <mat-button-toggle
+            (change)="valueChanges($event)"
+            [value]="data.errorMessage"
+            *ngFor="let data of reportData"
+            >{{ data.errorMessage }}</mat-button-toggle
+          >
+        </mat-button-toggle-group>
+      </section>
+    </div>
+  </ng-container>
+  <div class="row" *ngIf="!showChart">
+    <button mat-button color="primary" (click)="showChart = !showChart">
+      Click Here To Navigate Back To Report Page
     </button>
     <section>
-      <mat-button-toggle-group [formControl]="fontStyleControl" aria-label="Font Style">
-        <mat-button-toggle [value]="data.errorMessage" *ngFor="let data of reportData">{{data.errorMessage}}</mat-button-toggle>
+      <mat-button-toggle-group
+        [formControl]="fontStyleControl"
+        aria-label="Font Style"
+      >
+        <mat-button-toggle
+          [value]="data.errorMessage"
+          *ngFor="let data of reportData"
+          >{{ data.errorMessage }}</mat-button-toggle
+        >
       </mat-button-toggle-group>
     </section>
-    
+
     <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
-      
-          <!-- Position Column -->
-          <ng-container *ngFor="let col of displayedColumns" matColumnDef="{{col}}">
-            <th mat-header-cell *matHeaderCellDef style="width: 120px;"> {{col | splitcase}} </th>
-            <td mat-cell *matCellDef="let element" style="width: 120px;">  {{ value(col,element[col])}}</td>
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      
-        <mat-paginator [pageSizeOptions]="[5,10, 20]"
-                       showFirstLastButtons 
-                       aria-label="Select page of periodic elements">
-        </mat-paginator>
-      </div>
-      <mat-divider></mat-divider>
-      <button mat-button color="primary" (click)="showChart=!showChart">Go Back To Report
-      </button>
+      <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container
+          *ngFor="let col of displayedColumns"
+          matColumnDef="{{ col }}"
+        >
+          <th mat-header-cell *matHeaderCellDef style="width: 120px">
+            {{ col | splitcase }}
+          </th>
+          <td mat-cell *matCellDef="let element" style="width: 120px">
+            {{ value(col, element[col]) }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+    </div>
+    <button mat-button color="primary" (click)="showChart = !showChart">
+      Click Here To Navigate Back To Report Page
+    </button>
   </div>
 </div>
 <ng-http-loader></ng-http-loader>
