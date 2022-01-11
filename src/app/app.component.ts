@@ -59,10 +59,10 @@ export class AppComponent {
           this.chartLabels.push(data.errorMessage);
           dataSet.push(data.count);
         }
-        this.chartDataSets.push({
-          data: dataSet,
-          label: 'Types Of Rejections',
-        });
+        if (dataSet.length)
+          this.chartDataSets.push({
+            data: dataSet,
+          });
 
         this.chart?.update();
       },

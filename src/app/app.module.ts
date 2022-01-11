@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { DatePipe } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent, SplitcasePipe],
   imports: [
